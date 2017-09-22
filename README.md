@@ -1,6 +1,6 @@
 # cville-open-data
 This repository contains notes and work pertaining to the Charlottesville Open Data 
-Initiative. More details about the Charlottesvilel Open Data Initiative and 
+Initiative. More details about the Charlottesville Open Data Initiative and 
 the open data portal can be found at 
 [http://opendata.charlottesville.org/](http://opendata.charlottesville.org/).
 
