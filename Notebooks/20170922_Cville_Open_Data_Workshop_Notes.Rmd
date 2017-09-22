@@ -72,3 +72,25 @@ with the map.
 zone_parking_poly <- as_tibble(zone_parking$features$geometry)
 ```
 
+### Importing the data using geojsonio
+
+To get the files in as a true map file, I want to use the geojsonio package.
+
+```{r}
+library(geojsonio)
+```
+
+Now I can load in the map data. 
+
+```{r}
+zone_parking_geojson <- geojsonio::geojson_read(zone_parking_url, what = "sp")
+```
+
+What does the the imported map file look like? By making sure that geojson_read() 
+is set to "sp" for Spatial class, I get a SpatialPolygonsDataFrame type 
+object.
+
+```{r}
+glimpse(zone_parking_geojson)
+```
+
