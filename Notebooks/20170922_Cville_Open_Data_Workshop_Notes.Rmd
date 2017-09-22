@@ -76,7 +76,7 @@ zone_parking_poly <- as_tibble(zone_parking$features$geometry)
 
 To get the files in as a true map file, I want to use the geojsonio package.
 
-```{r}
+```{r, message = FALSE}
 library(geojsonio)
 ```
 
