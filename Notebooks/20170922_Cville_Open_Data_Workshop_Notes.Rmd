@@ -94,3 +94,31 @@ object.
 glimpse(zone_parking_geojson)
 ```
 
+## Manipulating geojson data for mapping
+
+To map our zone parking file in ggmap (or ggplot2), I need to convert the 
+Spatial Polygons Data Frame produced by geojson_read() into a normal data 
+frame. This can be done with the tidy() function from the broom package. 
+
+```{r}
+zone_parking_df <- broom::tidy(zone_parking_geojson)
+```
+
+The data frame looks like: 
+
+```{r}
+glimpse(zone_parking_df)
+```
+
+## Mapping data
+
+Now I can map the ODI data onto the map.
+
+```{r}
+cville_map %>% 
+  ggmap() +
+  geom_polygon(data = zone_parking_df, aes(x = long, y = lat, group = group), 
+               color = "blue", 
+               alpha = 0.4)
+```
+
