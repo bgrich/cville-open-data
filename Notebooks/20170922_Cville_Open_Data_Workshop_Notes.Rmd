@@ -31,7 +31,7 @@ get the following from Google Maps.
 First, I want to download the map.
 
 ```{r, message = FALSE}
-cville_map <- get_googlemap("charlottesville virginia", zoom = 12, maptype = "roadmap")
+cville_map <- get_googlemap("charlottesville virginia", zoom = 13, maptype = "roadmap")
 ```
 
 ### Creating the map
@@ -114,7 +114,7 @@ glimpse(zone_parking_df)
 
 Now I can map the ODI data onto the map.
 
-```{r}
+```{r, fig.width = 13}
 cville_map %>% 
   ggmap() +
   geom_polygon(data = zone_parking_df, aes(x = long, y = lat, group = group), 
