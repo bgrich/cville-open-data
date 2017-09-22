@@ -5,3 +5,16 @@ output:
     toc: TRUE
     toc_float: TRUE
 ---
+
+This notebook contains notes from the Open Data workshop and some tutorial 
+information on the tools used during it.
+
+## Packages
+
+For the workshop, I will likely need to make use of the following packages. 
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(ggmap)
+library(jsonlite)
+```
