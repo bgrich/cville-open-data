@@ -37,7 +37,7 @@ cville_map <- get_googlemap("charlottesville virginia", zoom = 12, maptype = "ro
 
 Next, I create the map using ggmap(). 
 
-```{r, fig.width = 11}
+```{r, fig.width = 13}
 ggmap(cville_map)
 ```
 
