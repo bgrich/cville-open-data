@@ -18,3 +18,26 @@ library(tidyverse)
 library(ggmap)
 library(jsonlite)
 ```
+
+## Testing ggmap
+
+I want to create a test image of Charlottesville to play with during the 
+workshop. Following the tutorial from the ggmap documentation, I can 
+get the following from Google Maps.
+
+### Downloading the map
+
+First, I want to download the map.
+
+```{r, message = FALSE}
+cville_map <- get_googlemap("charlottesville virginia", zoom = 12, maptype = "roadmap")
+```
+
+### Creating the map
+
+Next, I create the map using ggmap(). 
+
+```{r, fig.width = 11}
+ggmap(cville_map)
+```
+
