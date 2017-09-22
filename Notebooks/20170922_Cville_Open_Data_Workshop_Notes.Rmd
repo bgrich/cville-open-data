@@ -122,3 +122,4 @@ cville_map %>%
                alpha = 0.4)
 ```
 
+Now we have the zone parking data on top of the map of Charlottesville.
