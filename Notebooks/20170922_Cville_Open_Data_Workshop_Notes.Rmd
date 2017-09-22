@@ -17,6 +17,7 @@ For the workshop, I will likely need to make use of the following packages.
 library(tidyverse)
 library(ggmap)
 library(jsonlite)
+library(httr)
 ```
 
 ## Testing ggmap
@@ -39,5 +40,35 @@ Next, I create the map using ggmap().
 
 ```{r, fig.width = 13}
 ggmap(cville_map)
+```
+
+## Importing from ODI 
+
+Now, I want to import some data from the Open Data Portal. To do this, I 
+have gone onto the Open Data Portal and gotten the JSON API link for one of 
+the data sets. 
+
+```{r}
+zone_parking_url <- "https://opendata.arcgis.com/datasets/fc3f283eb0124c9dad792f5fbe674397_37.geojson"
+```
+
+I can use this url to download the JSON directly into R using the FromJSON() 
+function of jsonlite.
+
+```{r}
+zone_parking <- jsonlite::fromJSON(zone_parking_url)
+```
+
+We can now take a look at the structure of the imported JSON file.
+
+```{r}
+glimpse(zone_parking)
+```
+
+We can now turn the zone parking information into a data frame that we can use 
+with the map.
+
+```{r}
+zone_parking_poly <- as_tibble(zone_parking$features$geometry)
 ```
 

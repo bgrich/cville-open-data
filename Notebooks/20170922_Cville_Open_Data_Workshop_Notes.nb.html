@@ -308,11 +308,66 @@ library(jsonlite)</code></pre>
 <!-- rnb-plot-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+</div>
+<div id="importing-from-odi" class="section level2">
+<h2>Importing from ODI</h2>
+<p>Now, I want to import some data from the Open Data Portal. To do this, I have gone onto the Open Data Portal and gotten the JSON API link for one of the data sets.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuem9uZV9wYXJraW5nX3VybCA8LSBcImh0dHBzOi8vb3BlbmRhdGEuYXJjZ2lzLmNvbS9kYXRhc2V0cy9mYzNmMjgzZWIwMTI0YzlkYWQ3OTJmNWZiZTY3NDM5N18zNy5nZW9qc29uXCJcbmBgYCJ9 -->
+<pre class="r"><code>zone_parking_url &lt;- &quot;https://opendata.arcgis.com/datasets/fc3f283eb0124c9dad792f5fbe674397_37.geojson&quot;</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>I can use this url to download the JSON directly into R using the FromJSON() function of jsonlite.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuem9uZV9wYXJraW5nIDwtIGpzb25saXRlOjpmcm9tSlNPTih6b25lX3BhcmtpbmdfdXJsKVxuYGBgIn0= -->
+<pre class="r"><code>zone_parking &lt;- jsonlite::fromJSON(zone_parking_url)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>We can now take a look at the structure of the imported JSON file.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2xpbXBzZSh6b25lX3BhcmtpbmcpXG5cbmBgYCJ9 -->
+<pre class="r"><code>glimpse(zone_parking)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTGlzdCBvZiAyXG4gJCB0eXBlICAgIDogY2hyIFwiRmVhdHVyZUNvbGxlY3Rpb25cIlxuICQgZmVhdHVyZXM6J2RhdGEuZnJhbWUnOlx0OCBvYnMuIG9mICAzIHZhcmlhYmxlczpcbiAgLi4kIHR5cGUgICAgICA6IGNociBbMTo4XSBcIkZlYXR1cmVcIiBcIkZlYXR1cmVcIiBcIkZlYXR1cmVcIiBcIkZlYXR1cmVcIiAuLi5cbiAgLi4kIHByb3BlcnRpZXM6J2RhdGEuZnJhbWUnOlx0OCBvYnMuIG9mICA1IHZhcmlhYmxlczpcbiAgLi4gLi4kIE9CSkVDVElEICAgOiBpbnQgWzE6OF0gMSAyIDMgNCA1IDYgNyA5XG4gIC4uIC4uJCB6b25lICAgICAgIDogaW50IFsxOjhdIDEgNCA2IDcgOCAyNCA5IDI0XG4gIC4uIC4uJCBOYW1lICAgICAgIDogY2hyIFsxOjhdIFwiWm9uZSAxXCIgXCJab25lIDRcIiBcIlpvbmUgNlwiIFwiWm9uZSA3XCIgLi4uXG4gIC4uIC4uJCB2aWNpbml0eSAgIDogY2hyIFsxOjhdIFwiVW5pdmVyc2l0eVwiIFwiTm9ydGggRG93bnRvd25cIiBcIlN0YXJyIEhpbGxcIiBcIkZpZmV2aWxsZVwiIC4uLlxuICAuLiAuLiQgU2hhcGVTVEFyZWE6IG51bSBbMTo4XSA0OTk0Njk2NiA0NzA2MjQzIDQzNTU2NSA2MjAxNTIzIDI0MDUzNSAuLi5cbiAgLi4kIGdlb21ldHJ5ICA6J2RhdGEuZnJhbWUnOlx0OCBvYnMuIG9mICAyIHZhcmlhYmxlczpcbiAgLi4gLi4kIHR5cGUgICAgICAgOiBjaHIgWzE6OF0gXCJQb2x5Z29uXCIgXCJQb2x5Z29uXCIgXCJQb2x5Z29uXCIgXCJQb2x5Z29uXCIgLi4uXG4gIC4uIC4uJCBjb29yZGluYXRlczpMaXN0IG9mIDhcbiJ9 -->
+<pre><code>List of 2
+ $ type    : chr &quot;FeatureCollection&quot;
+ $ features:'data.frame':   8 obs. of  3 variables:
+  ..$ type      : chr [1:8] &quot;Feature&quot; &quot;Feature&quot; &quot;Feature&quot; &quot;Feature&quot; ...
+  ..$ properties:'data.frame':  8 obs. of  5 variables:
+  .. ..$ OBJECTID   : int [1:8] 1 2 3 4 5 6 7 9
+  .. ..$ zone       : int [1:8] 1 4 6 7 8 24 9 24
+  .. ..$ Name       : chr [1:8] &quot;Zone 1&quot; &quot;Zone 4&quot; &quot;Zone 6&quot; &quot;Zone 7&quot; ...
+  .. ..$ vicinity   : chr [1:8] &quot;University&quot; &quot;North Downtown&quot; &quot;Starr Hill&quot; &quot;Fifeville&quot; ...
+  .. ..$ ShapeSTArea: num [1:8] 49946966 4706243 435565 6201523 240535 ...
+  ..$ geometry  :'data.frame':  8 obs. of  2 variables:
+  .. ..$ type       : chr [1:8] &quot;Polygon&quot; &quot;Polygon&quot; &quot;Polygon&quot; &quot;Polygon&quot; ...
+  .. ..$ coordinates:List of 8</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>We can now turn the zone parking information into a data frame that we can use with the map.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuem9uZV9wYXJraW5nX3BvbHkgPC0gdGliYmxlKHpvbmVfcGFya2luZyRmZWF0dXJlcyRnZW9tZXRyeSlcblxuYGBgIn0= -->
+<pre class="r"><code>zone_parking_poly &lt;- tibble(zone_parking$features$geometry)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IENvbHVtbiBgem9uZV9wYXJraW5nJGZlYXR1cmVzJGdlb21ldHJ5YCBtdXN0IGJlIGEgMWQgYXRvbWljIHZlY3RvciBvciBhIGxpc3RcbiJ9 -->
+<pre><code>Error: Column `zone_parking$features$geometry` must be a 1d atomic vector or a list</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
-</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIjIwMTcgMDkgMjIgQ3ZpbGxlIE9wZW4gRGF0YSBXb3Jrc2hvcCBOb3RlcyINCm91dHB1dDogDQogIGh0bWxfbm90ZWJvb2s6DQogICAgdG9jOiBUUlVFDQogICAgdG9jX2Zsb2F0OiBUUlVFDQotLS0NCg0KVGhpcyBub3RlYm9vayBjb250YWlucyBub3RlcyBmcm9tIHRoZSBPcGVuIERhdGEgd29ya3Nob3AgYW5kIHNvbWUgdHV0b3JpYWwgDQppbmZvcm1hdGlvbiBvbiB0aGUgdG9vbHMgdXNlZCBkdXJpbmcgaXQuDQoNCiMjIFBhY2thZ2VzDQoNCkZvciB0aGUgd29ya3Nob3AsIEkgd2lsbCBsaWtlbHkgbmVlZCB0byBtYWtlIHVzZSBvZiB0aGUgZm9sbG93aW5nIHBhY2thZ2VzLiANCg0KYGBge3IsIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFfQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpsaWJyYXJ5KGdnbWFwKQ0KbGlicmFyeShqc29ubGl0ZSkNCmBgYA0KDQojIyBUZXN0aW5nIGdnbWFwDQoNCkkgd2FudCB0byBjcmVhdGUgYSB0ZXN0IGltYWdlIG9mIENoYXJsb3R0ZXN2aWxsZSB0byBwbGF5IHdpdGggZHVyaW5nIHRoZSANCndvcmtzaG9wLiBGb2xsb3dpbmcgdGhlIHR1dG9yaWFsIGZyb20gdGhlIGdnbWFwIGRvY3VtZW50YXRpb24sIEkgY2FuIA0KZ2V0IHRoZSBmb2xsb3dpbmcgZnJvbSBHb29nbGUgTWFwcy4NCg0KIyMjIERvd25sb2FkaW5nIHRoZSBtYXANCg0KRmlyc3QsIEkgd2FudCB0byBkb3dubG9hZCB0aGUgbWFwLg0KDQpgYGB7ciwgbWVzc2FnZSA9IEZBTFNFfQ0KY3ZpbGxlX21hcCA8LSBnZXRfZ29vZ2xlbWFwKCJjaGFybG90dGVzdmlsbGUgdmlyZ2luaWEiLCB6b29tID0gMTIsIG1hcHR5cGUgPSAicm9hZG1hcCIpDQpgYGANCg0KIyMjIENyZWF0aW5nIHRoZSBtYXANCg0KTmV4dCwgSSBjcmVhdGUgdGhlIG1hcCB1c2luZyBnZ21hcCgpLiANCg0KYGBge3IsIGZpZy53aWR0aCA9IDEzfQ0KZ2dtYXAoY3ZpbGxlX21hcCkNCmBgYA0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIjIwMTcgMDkgMjIgQ3ZpbGxlIE9wZW4gRGF0YSBXb3Jrc2hvcCBOb3RlcyINCm91dHB1dDogDQogIGh0bWxfbm90ZWJvb2s6DQogICAgdG9jOiBUUlVFDQogICAgdG9jX2Zsb2F0OiBUUlVFDQotLS0NCg0KVGhpcyBub3RlYm9vayBjb250YWlucyBub3RlcyBmcm9tIHRoZSBPcGVuIERhdGEgd29ya3Nob3AgYW5kIHNvbWUgdHV0b3JpYWwgDQppbmZvcm1hdGlvbiBvbiB0aGUgdG9vbHMgdXNlZCBkdXJpbmcgaXQuDQoNCiMjIFBhY2thZ2VzDQoNCkZvciB0aGUgd29ya3Nob3AsIEkgd2lsbCBsaWtlbHkgbmVlZCB0byBtYWtlIHVzZSBvZiB0aGUgZm9sbG93aW5nIHBhY2thZ2VzLiANCg0KYGBge3IsIG1lc3NhZ2UgPSBGQUxTRSwgd2FybmluZyA9IEZBTFNFfQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpsaWJyYXJ5KGdnbWFwKQ0KbGlicmFyeShqc29ubGl0ZSkNCmxpYnJhcnkoaHR0cikNCmBgYA0KDQojIyBUZXN0aW5nIGdnbWFwDQoNCkkgd2FudCB0byBjcmVhdGUgYSB0ZXN0IGltYWdlIG9mIENoYXJsb3R0ZXN2aWxsZSB0byBwbGF5IHdpdGggZHVyaW5nIHRoZSANCndvcmtzaG9wLiBGb2xsb3dpbmcgdGhlIHR1dG9yaWFsIGZyb20gdGhlIGdnbWFwIGRvY3VtZW50YXRpb24sIEkgY2FuIA0KZ2V0IHRoZSBmb2xsb3dpbmcgZnJvbSBHb29nbGUgTWFwcy4NCg0KIyMjIERvd25sb2FkaW5nIHRoZSBtYXANCg0KRmlyc3QsIEkgd2FudCB0byBkb3dubG9hZCB0aGUgbWFwLg0KDQpgYGB7ciwgbWVzc2FnZSA9IEZBTFNFfQ0KY3ZpbGxlX21hcCA8LSBnZXRfZ29vZ2xlbWFwKCJjaGFybG90dGVzdmlsbGUgdmlyZ2luaWEiLCB6b29tID0gMTIsIG1hcHR5cGUgPSAicm9hZG1hcCIpDQpgYGANCg0KIyMjIENyZWF0aW5nIHRoZSBtYXANCg0KTmV4dCwgSSBjcmVhdGUgdGhlIG1hcCB1c2luZyBnZ21hcCgpLiANCg0KYGBge3IsIGZpZy53aWR0aCA9IDEzfQ0KZ2dtYXAoY3ZpbGxlX21hcCkNCmBgYA0KDQojIyBJbXBvcnRpbmcgZnJvbSBPREkgDQoNCk5vdywgSSB3YW50IHRvIGltcG9ydCBzb21lIGRhdGEgZnJvbSB0aGUgT3BlbiBEYXRhIFBvcnRhbC4gVG8gZG8gdGhpcywgSSANCmhhdmUgZ29uZSBvbnRvIHRoZSBPcGVuIERhdGEgUG9ydGFsIGFuZCBnb3R0ZW4gdGhlIEpTT04gQVBJIGxpbmsgZm9yIG9uZSBvZiANCnRoZSBkYXRhIHNldHMuIA0KDQpgYGB7cn0NCnpvbmVfcGFya2luZ191cmwgPC0gImh0dHBzOi8vb3BlbmRhdGEuYXJjZ2lzLmNvbS9kYXRhc2V0cy9mYzNmMjgzZWIwMTI0YzlkYWQ3OTJmNWZiZTY3NDM5N18zNy5nZW9qc29uIg0KYGBgDQoNCkkgY2FuIHVzZSB0aGlzIHVybCB0byBkb3dubG9hZCB0aGUgSlNPTiBkaXJlY3RseSBpbnRvIFIgdXNpbmcgdGhlIEZyb21KU09OKCkgDQpmdW5jdGlvbiBvZiBqc29ubGl0ZS4NCg0KYGBge3J9DQp6b25lX3BhcmtpbmcgPC0ganNvbmxpdGU6OmZyb21KU09OKHpvbmVfcGFya2luZ191cmwpDQpgYGANCg0KV2UgY2FuIG5vdyB0YWtlIGEgbG9vayBhdCB0aGUgc3RydWN0dXJlIG9mIHRoZSBpbXBvcnRlZCBKU09OIGZpbGUuDQoNCmBgYHtyfQ0KZ2xpbXBzZSh6b25lX3BhcmtpbmcpDQpgYGANCg0KV2UgY2FuIG5vdyB0dXJuIHRoZSB6b25lIHBhcmtpbmcgaW5mb3JtYXRpb24gaW50byBhIGRhdGEgZnJhbWUgdGhhdCB3ZSBjYW4gdXNlIA0Kd2l0aCB0aGUgbWFwLg0KDQpgYGB7cn0NCnpvbmVfcGFya2luZ19wb2x5IDwtIGFzX3RpYmJsZSh6b25lX3BhcmtpbmckZmVhdHVyZXMkZ2VvbWV0cnkpDQpgYGANCg0K</div>
 
 
 </div>
